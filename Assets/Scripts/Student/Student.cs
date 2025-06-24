@@ -33,7 +33,8 @@ public class Student : MonoBehaviour
     {
         _studentStateDict = new Dictionary<EStudentType, IStudentState>
         {
-            { EStudentType.Gymnastics, new GymnasticsType(this) },
+            { EStudentType.Gymnastics, new GymnasticsState(this) },
+            { EStudentType.Idle, new IdleState(this) },
         };
         ChangeState(EStudentType.Gymnastics);
     }
@@ -92,6 +93,7 @@ public class Student : MonoBehaviour
         else
         {
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddScore, 50);
+            Debug.Log($"{_currentType}, {_studentManager.TargetStateType}");
         }
     }
     #endregion

@@ -11,5 +11,6 @@ public class GameStart : MonoBehaviour
     private void SetManager()
     {
         GenericSingleton<GameManager>.Instance.Init();
+        GenericSingleton<StudentManager>.Instance.Init();
     }
 }

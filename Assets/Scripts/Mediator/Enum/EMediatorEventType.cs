@@ -4,6 +4,8 @@ public enum EMediatorEventType
     ChangeHP,
     LostRhythm,
     PigeonEvent,
+    RyoikiTenkaiEvent,
+    StopStudent,
     GameOver,
     Max,
 }

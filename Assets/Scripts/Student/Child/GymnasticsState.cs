@@ -1,12 +1,10 @@
-using UnityEngine;
-
-public class GymnasticsType : IStudentState
+public class GymnasticsState : IStudentState
 {
     Student _student;
 
-    public GymnasticsType(Student student)
+    public GymnasticsState(Student student)
     {
-        _student= student;  
+        _student = student;
     }
 
     void IStudentState.Enter()
