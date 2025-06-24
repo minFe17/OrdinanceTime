@@ -16,7 +16,7 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
     int _randomPath;
     float _speed = 1f;
     float _elapsed;
-    bool _isPigeonEvent = true;
+    bool _isPigeonEvent = false;
     bool _isIdle = false;
     bool _hasIdled = false;
 
