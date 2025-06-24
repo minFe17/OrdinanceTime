@@ -77,7 +77,7 @@ public class Student : MonoBehaviour
     public void ReturnToGymnastics()
     {
         float time = _studentManager.GetCurrentAnimationTime();
-        //_animator.Play("", 0, time);
+        //_animator.CrossFade("", 0.2f, 0, time);
         ChangeState(EStudentType.Gymnastics);   
     }
     #endregion
