@@ -12,8 +12,8 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
         _animator = GetComponent<Animator>();
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.RyoikiTenkaiEvent, this);
 
+        _animator.speed = 0.7f;
         _animator.SetBool("isRyoikiTenkai", true);
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopStudent);
         Invoke("EndAnimation", _lifetime);
 
     }
@@ -21,12 +21,14 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
     void EndAnimation()
     {
         _animator.SetBool("isRyoikiTenkai", false);
+        _animator.speed = 1f;
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopStudent);
     }
 
     void IMediatorEvent.HandleEvent(object data)
     {
+        _animator.speed = 0.7f;
         _animator.SetBool("isRyoikiTenkai", true);
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopStudent);
         Invoke("EndAnimation", _lifetime);
     }
 }
