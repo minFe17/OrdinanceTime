@@ -6,8 +6,9 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
     [SerializeField] float _lifetime;
 
     Animator _animator;
-
     MediatorManager _mediatorManager;
+
+    bool _isOnEvent;
 
     private void Start()
     {
@@ -37,7 +38,10 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
+        if(_isOnEvent)
+            return;
         PlaySFX();
         Invoke("PlayAnimation", 0.7f);
+        _isOnEvent = true;
     }
 }

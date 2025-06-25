@@ -20,6 +20,11 @@ public class SoundController : MonoBehaviour
             _index = 0;
     }
 
+    public void StopSFXAudio()
+    {
+        _sfxAudio[_index-1].Stop();
+    }
+
     public void StartBGM(AudioClip audio)
     {
         _bgm.clip = audio;

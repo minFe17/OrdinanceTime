@@ -67,14 +67,14 @@ public class Student : MonoBehaviour
     #endregion
 
     #region Animation
-    public void ChangeAnimation(string name, bool value)
-    {
-        // SetBool
-    }
-
     public void ChangeAnimation(string name)
     {
-        // SetTrigger
+        _animator.Play(name);
+    }
+
+    public void ChangeAnimation(string name, int value)
+    {
+        _animator.SetInteger(name, value);
     }
 
     public float GetAnimationTime()
@@ -91,7 +91,7 @@ public class Student : MonoBehaviour
 
     public void ReturnToGymnastics(int hash, float time)
     {
-        _animator.CrossFade(hash, 0, 0, time);
+        _animator.CrossFade(hash, 0.2f, 0, time);
         _currentType = EStudentType.Gymnastics;
         _currentState = _studentStateDict[_currentType];
     }

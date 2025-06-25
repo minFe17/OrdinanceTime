@@ -4,7 +4,6 @@ using Utils;
 public class SoundManager : MonoBehaviour
 {
     // ΩÃ±€≈œ¿∏∑Œ »£√‚µ 
-
     SoundController _soundController;
     PrefabManager _prefabManager;
 

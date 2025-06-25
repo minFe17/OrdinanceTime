@@ -40,6 +40,7 @@ public class StudentManager : MonoBehaviour
 
     public void AddStudent(Student student)
     {
+
         _students.Add(student);
     }
 
@@ -57,6 +58,12 @@ public class StudentManager : MonoBehaviour
     public void SetTargetStateType(EStudentType targetStateType)
     {
         _targetStateType = targetStateType;
+    }
+
+    public void ChangeAnimation(string name, int value)
+    {
+        for (int i=0; i<_students.Count; i++)
+            _students[i].ChangeAnimation(name, value);
     }
 
     public void StopEvent()

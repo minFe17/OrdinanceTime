@@ -16,8 +16,8 @@ public class SoundPrefabLoad : PrefabLoadBase
     {
         Init();
         _soundPrefab = await _addressableManager.GetAddressableAsset<GameObject>("SoundController");
-        //for (int i = 0; i < (int)EBGMType.Max; i++)
-        //    _bgmPrefab.Add(await _addressableManager.GetAddressableAsset<AudioClip>($"{(EBGMType)i}"));
+        for (int i = 0; i < (int)EBGMType.Max; i++)
+            _bgmPrefab.Add(await _addressableManager.GetAddressableAsset<AudioClip>($"{(EBGMType)i}"));
 
         for (int i = 0; i < (int)ESFXType.Max; i++)
             _sfxPrefab.Add(await _addressableManager.GetAddressableAsset<AudioClip>($"{(ESFXType)i}"));

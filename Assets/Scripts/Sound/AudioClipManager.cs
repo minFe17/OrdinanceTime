@@ -33,6 +33,11 @@ public class AudioClipManager : MonoBehaviour, IMediatorEvent
         _soundController.PlaySFXAudio(_sfxAudio[(int)type]);
     }
 
+    public void StopSFX()
+    {
+        _soundController.StopSFXAudio();
+    }
+
     void IMediatorEvent.HandleEvent(object data)
     {
         if(data is ESFXType sfxType)

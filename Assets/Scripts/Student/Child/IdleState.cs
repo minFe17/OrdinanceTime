@@ -6,7 +6,7 @@ public class IdleState : MonoBehaviour, IStudentState
     Student _student;
     StudentManager _studentManager;
 
-    float _returnToGymnasticsTime = 1f;
+    float _returnToGymnasticsTime = 4f;
     float _time;
 
     public IdleState(Student student)
@@ -28,7 +28,7 @@ public class IdleState : MonoBehaviour, IStudentState
     void IStudentState.Enter()
     {
         // 애니메이션 변경
-        _student.ChangeAnimationSpeed(0.5f);
+        _student.ChangeAnimation("Idle");
     }
 
     void IStudentState.Loop()
@@ -38,7 +38,6 @@ public class IdleState : MonoBehaviour, IStudentState
 
     void IStudentState.Exit()
     {
-        _student.ChangeAnimationSpeed(1f);
         _student.ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
     }
 }

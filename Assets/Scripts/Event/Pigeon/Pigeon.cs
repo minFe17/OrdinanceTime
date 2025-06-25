@@ -65,13 +65,19 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
         if (_currentIndex == 0)
         {
             Set();
-
         }
         else if (_currentIndex == (_flyPosList[_randomPath].PositionList.Count / 2) + 1)
         {
             Idle();
             _hasIdled = true;
         }
+        
+        if(_currentIndex >= _flyPosList.Count)
+        {
+            _currentIndex = 0;
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopSFX);
+        }    
+      
     }
 
     void Idle()

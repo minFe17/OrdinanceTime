@@ -7,6 +7,7 @@ public enum EMediatorEventType
     RyoikiTenkaiEvent,
     StopStudent,
     PlayAudio,
+    StopSFX,
     GameOver,
     Max,
 }

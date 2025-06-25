@@ -17,8 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c91cf94ee0b24fa49ba0421d03e9a81d
   m_SerializeEntries:
+  - m_GUID: 580f6f342e9e6a548b7e689f1531dfe6
+    m_Address: Pigeon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a85e78e061a0e2498081ff250d57dd1
     m_Address: SoundController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d00e28659380a844b74029f1e478d92
+    m_Address: Gymnastics
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
