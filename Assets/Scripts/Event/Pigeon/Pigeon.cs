@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils;
 
 public class Pigeon : MonoBehaviour, IMediatorEvent
 {
+    [SerializeField] List<Image> _pigeonImage = new List<Image>();
     [SerializeField] List<PigeonFlyPos> _flyPosList = new List<PigeonFlyPos>();
+    [SerializeField] List<Color> _colorList = new List<Color>();
     [SerializeField] float _idleTime;
 
     Animator _animator;
@@ -49,6 +52,16 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
         _hasIdled = false;
         _animator.SetBool("isFly", false);
         _animator.SetBool("isIdle", false);
+        int random = Random.Range(0, _colorList.Count);
+        SetColor(_colorList[random]);
+    }
+
+    void SetColor(Color color)
+    {
+        for(int i=0; i<=_pigeonImage.Count; i++)
+        {
+            _pigeonImage[i].color = color;
+        }
     }
 
     void Move()
@@ -71,13 +84,6 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
             Idle();
             _hasIdled = true;
         }
-        
-        if(_currentIndex >= _flyPosList.Count)
-        {
-            _currentIndex = 0;
-            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopSFX);
-        }    
-      
     }
 
     void Idle()

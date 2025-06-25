@@ -11,12 +11,13 @@ public class StopState : MonoBehaviour, IStudentState
 
     void IStudentState.Enter()
     {
+        Debug.Log("StopState Entered");
         _student.ChangeAnimationSpeed(0f);
     }
 
     void IStudentState.Loop()
     {
-
+        
     }
 
     void IStudentState.Exit()

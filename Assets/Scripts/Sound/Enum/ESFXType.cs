@@ -1,6 +1,7 @@
 public enum ESFXType
 {
     RyoikiTenkai,
-    Pigeon,
+    Pigeon1,
+    Pigeon2,
     Max
 }

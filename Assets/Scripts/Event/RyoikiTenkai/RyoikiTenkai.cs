@@ -26,6 +26,7 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
 
     void EndAnimation()
     {
+        Debug.Log(1);
         _animator.SetBool("isRyoikiTenkai", false);
         _animator.speed = 1f;
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopStudent);

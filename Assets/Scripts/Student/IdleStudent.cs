@@ -10,6 +10,7 @@ public class IdleStudent : MonoBehaviour, IMediatorEvent
         _studentManager = studentManager;
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.StopStudent, this);
     }
+
     void IMediatorEvent.HandleEvent(object data)
     {
         _studentManager.StopEvent();

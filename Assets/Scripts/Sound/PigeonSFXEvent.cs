@@ -10,6 +10,7 @@ public class PigeonSFXEvent : MonoBehaviour, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        GenericSingleton<AudioClipManager>.Instance.PlaySFX(ESFXType.Pigeon);
+        int random = Random.Range((int)ESFXType.Pigeon1, (int)ESFXType.Pigeon2+1);
+        GenericSingleton<AudioClipManager>.Instance.PlaySFX((ESFXType)random);
     }
 }
