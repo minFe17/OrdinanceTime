@@ -23,7 +23,6 @@ public class MediatorManager : MonoBehaviour
     {
         if (_mediatorEvents.TryGetValue(key, out List<IMediatorEvent> list))
         {
-            Debug.Log($"Notify: {key}, {list.Count}");
             for (int i = 0; i < list.Count; i++)
                 list[i].HandleEvent(data);
         }

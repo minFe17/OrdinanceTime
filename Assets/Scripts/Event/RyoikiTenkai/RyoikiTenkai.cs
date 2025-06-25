@@ -7,15 +7,20 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
 
     Animator _animator;
 
+    MediatorManager _mediatorManager;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.RyoikiTenkaiEvent, this);
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
+        _mediatorManager.Register(EMediatorEventType.RyoikiTenkaiEvent, this);
+    }
 
+    void PlayAnimation()
+    {
         _animator.speed = 0.7f;
         _animator.SetBool("isRyoikiTenkai", true);
-        Invoke("EndAnimation", _lifetime);
-
+        Invoke("EndAnimation", _lifetime + 0.7f);
     }
 
     void EndAnimation()
@@ -25,10 +30,14 @@ public class RyoikiTenkai : MonoBehaviour, IMediatorEvent
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StopStudent);
     }
 
+    void PlaySFX()
+    {
+        _mediatorManager.Notify(EMediatorEventType.PlayAudio, ESFXType.RyoikiTenkai);
+    }
+
     void IMediatorEvent.HandleEvent(object data)
     {
-        _animator.speed = 0.7f;
-        _animator.SetBool("isRyoikiTenkai", true);
-        Invoke("EndAnimation", _lifetime);
+        PlaySFX();
+        Invoke("PlayAnimation", 0.7f);
     }
 }

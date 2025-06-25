@@ -182,10 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3aed533e54c054096801869d9b5ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HpImageList:
-  - {fileID: 424155439}
-  - {fileID: 1316292159}
-  - {fileID: 1381709345}
+  _hpImageList: []
 --- !u!1 &61168067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1090705726}
   - component: {fileID: 1090705728}
+  - component: {fileID: 1090705729}
   m_Layer: 5
   m_Name: ScorePanel
   m_TagString: Untagged
@@ -1718,6 +1716,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090705725}
   m_CullTransparentMesh: 1
+--- !u!114 &1090705729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090705725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e655c5104d6cc45ba8c41887f3cfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 1780897080}
 --- !u!1 &1179055631
 GameObject:
   m_ObjectHideFlags: 0

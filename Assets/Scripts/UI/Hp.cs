@@ -4,28 +4,33 @@ using Utils;
 
 public class Hp : MonoBehaviour, IMediatorEvent
 {
-    [SerializeField] List<GameObject> _HpImageList = new List<GameObject>();
+    [SerializeField] List<GameObject> _hpImageList = new List<GameObject>();
     int _hp;
 
     void Start()
     {
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.ChangeHP, this);
-        _hp = _HpImageList.Count; 
+        _hp = _hpImageList.Count; 
     }
 
-    void ShowHp()
+    void ShowHp(int value)
     {
-        for (int i = 0; i < _HpImageList.Count; i++)
-            _HpImageList[i].SetActive(false);
-        for (int i = 0; i < _hp; i++)
-            _HpImageList[i].SetActive(true);
+        if(value < 0)
+            _hpImageList[_hp].SetActive(false);
+        else if(value > 0)
+            _hpImageList[_hp-1].SetActive(true);
+    }
+
+    public void PlaySFX()
+    {
+
     }
 
     void IMediatorEvent.HandleEvent(object data)
     {
         int value = (int)data;
         _hp += value;
-        ShowHp();
+        ShowHp(value);
         if (_hp <= 0)
         {
             // 게임오버

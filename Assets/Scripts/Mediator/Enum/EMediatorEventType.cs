@@ -6,6 +6,7 @@ public enum EMediatorEventType
     PigeonEvent,
     RyoikiTenkaiEvent,
     StopStudent,
+    PlayAudio,
     GameOver,
     Max,
 }

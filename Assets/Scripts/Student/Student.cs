@@ -93,7 +93,6 @@ public class Student : MonoBehaviour
         else
         {
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddScore, 50);
-            Debug.Log($"{_currentType}, {_studentManager.TargetStateType}");
         }
     }
     #endregion

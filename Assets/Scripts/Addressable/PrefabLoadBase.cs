@@ -13,5 +13,4 @@ public abstract class PrefabLoadBase : MonoBehaviour
     }
 
     public abstract Task LoadPrefab();
-    public virtual GameObject GetPrefab() => null;
 }
