@@ -17,6 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c91cf94ee0b24fa49ba0421d03e9a81d
   m_SerializeEntries:
+  - m_GUID: 061199db624c6794690195ff34b4e902
+    m_Address: Waflash
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2667a0a008b044e218b63df62e2be749
+    m_Address: GameClear
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5852b1060baf1624cb508f1d6c6117a0
     m_Address: Pigeon2
     m_ReadOnly: 0
@@ -27,13 +37,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bd6b897eb5ca4b7d88a205c4a51640c
+    m_Address: Score
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d00e28659380a844b74029f1e478d92
     m_Address: Gymnastics
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e6929abc3ce12740af248ba626a68b5
+    m_Address: GameOver
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8cbfbe8764771fb4c9e2086e621cf703
     m_Address: RyoikiTenkai
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9ae90978e24c7c47a5b4129b7d6a5dd
+    m_Address: NanigaSuki
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9eff218e132a4e76be78840eca96fb2
+    m_Address: Fail
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

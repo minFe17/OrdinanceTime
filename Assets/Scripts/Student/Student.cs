@@ -12,7 +12,7 @@ public class Student : MonoBehaviour
     Animator _animator;
     StudentManager _studentManager;
 
-    public EStudentType CurrentType { get=>_currentType; }
+    public EStudentType CurrentType { get => _currentType; }
 
 
     #region Unity Lifecycle
@@ -42,7 +42,9 @@ public class Student : MonoBehaviour
         {
             { EStudentType.Gymnastics, new GymnasticsState(this) },
             { EStudentType.Idle, new IdleState(this) },
-            {EStudentType.Stop, new StopState(this) }
+            {EStudentType.Stop, new StopState(this) },
+            {EStudentType.NanigaSuki, new NanigaSukiState(this) }
+            ,{EStudentType.Waflash, new WaflashState(this) }
         };
         ChangeState(EStudentType.Gymnastics);
     }
@@ -58,7 +60,7 @@ public class Student : MonoBehaviour
     {
         if (_currentState == _studentStateDict[type])
             return;
-        if(_currentState != null)
+        if (_currentState != null)
             _currentState.Exit();
         _currentType = type;
         _currentState = _studentStateDict[_currentType];
@@ -77,9 +79,14 @@ public class Student : MonoBehaviour
         _animator.SetInteger(name, value);
     }
 
+    public void ChangeAnimationTrigger(string name)
+    {
+        _animator.SetTrigger(name);
+    }
+
     public float GetAnimationTime()
     {
-        AnimatorStateInfo state =  _animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo state = _animator.GetCurrentAnimatorStateInfo(0);
         return state.normalizedTime % 1f;
     }
 
@@ -114,6 +121,8 @@ public class Student : MonoBehaviour
         {
             Debug.Log($"ChangeState : {_studentManager.TargetStateType}");
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddScore, 50);
+            GameObject temp = Instantiate(GenericSingleton<PrefabManager>.Instance.EffectPrefabLoad.EffectPrefab);
+            temp.transform.position += transform.position;
             ChangeState(_studentManager.TargetStateType);
             ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
         }

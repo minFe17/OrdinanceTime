@@ -18,6 +18,7 @@ public class GameOverUI : MonoBehaviour, IMediatorEvent
   
     void IMediatorEvent.HandleEvent(object data)
     {
+        GenericSingleton<AudioClipManager>.Instance.PlaySFX(ESFXType.GameOver);
         _gameOverUI.SetActive(true);
     }
 }

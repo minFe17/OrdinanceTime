@@ -3,6 +3,7 @@ using UnityEngine;
 public class StopState : MonoBehaviour, IStudentState
 {
     Student _student;
+    StudentManager _studentManager;
 
     public StopState(Student student)
     {
@@ -23,5 +24,6 @@ public class StopState : MonoBehaviour, IStudentState
     void IStudentState.Exit()
     {
         _student.ChangeAnimationSpeed(1f);
+        //_student.ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
     }
 }

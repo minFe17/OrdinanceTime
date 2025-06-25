@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15506fd89dc3a7429bca2753f9fd417
+    m_Address: Effect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: efbdc8ac4fae6e44fb0cf65d8a9703ae
     m_Address: Ninja
     m_ReadOnly: 0

@@ -29,6 +29,7 @@ public class Hp : MonoBehaviour, IMediatorEvent
         int value = (int)data;
         _hp += value;
         ShowHp(value);
+        GenericSingleton<AudioClipManager>.Instance.PlaySFX(ESFXType.Fail);
         if (_hp <= 0)
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.GameOver, this);
     }

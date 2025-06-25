@@ -7,7 +7,6 @@ using Utils;
 public class Pigeon : MonoBehaviour, IMediatorEvent
 {
     [SerializeField] List<Image> _pigeonImage = new List<Image>();
-    [SerializeField] List<PigeonFlyPos> _flyPosList = new List<PigeonFlyPos>();
     [SerializeField] List<Color> _colorList = new List<Color>();
     [SerializeField] float _idleTime;
 
@@ -28,21 +27,12 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.PigeonEvent, this);
         _animator = GetComponent<Animator>();
         _pigeonRectTransform = GetComponent<RectTransform>();
-        _randomPath = Random.Range(0, _flyPosList.Count);
-        _pigeonRectTransform.anchoredPosition = _flyPosList[_randomPath].PositionList[0].anchoredPosition;
         SetNextPosition();
-    }
-
-    void Update()
-    {
-        Move();
     }
 
     void SetNextPosition()
     {
-        _currentIndex = (_currentIndex + 1) % _flyPosList[_randomPath].PositionList.Count;
         _startPos = _pigeonRectTransform.anchoredPosition;
-        _targetPos = _flyPosList[_randomPath].PositionList[_currentIndex].anchoredPosition;
         _elapsed = 0f;
     }
 
@@ -58,34 +48,12 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
 
     void SetColor(Color color)
     {
-        for(int i=0; i<=_pigeonImage.Count; i++)
+        for (int i = 0; i < _pigeonImage.Count; i++)
         {
             _pigeonImage[i].color = color;
         }
     }
-
-    void Move()
-    {
-        if (!_isPigeonEvent || _isIdle)
-            return;
-        _elapsed += Time.deltaTime;
-        float t = Mathf.Clamp01(_elapsed / _speed);
-        _pigeonRectTransform.anchoredPosition = Vector3.Lerp(_startPos, _targetPos, t);
-
-        if (t >= 1f)
-            SetNextPosition();
-
-        if (_currentIndex == 0)
-        {
-            Set();
-        }
-        else if (_currentIndex == (_flyPosList[_randomPath].PositionList.Count / 2) + 1)
-        {
-            Idle();
-            _hasIdled = true;
-        }
-    }
-
+  
     void Idle()
     {
         if (_animator.GetBool("isIdle"))
@@ -106,6 +74,10 @@ public class Pigeon : MonoBehaviour, IMediatorEvent
     void IMediatorEvent.HandleEvent(object data)
     {
         _isPigeonEvent = true;
+        for(int i=0; i<_pigeonImage.Count; i++)
+            _pigeonImage[i].gameObject.SetActive(true);
+        Set();
+        _animator.SetBool("isMove", true);
     }
 
     IEnumerator EndIdleRoutine()

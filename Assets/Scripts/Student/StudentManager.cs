@@ -7,6 +7,8 @@ public class StudentManager : MonoBehaviour
     List<Student> _students = new List<Student>();
     IdleStudent _idleStudent = new IdleStudent();
     StopStudent _stopStudent = new StopStudent();
+    NanigaSukiEvent _nanigaSukiEvent = new NanigaSukiEvent();
+    WafalseEvent _wafalseEvent = new WafalseEvent();
 
     // 스테이지 바뀔때마다 변경?
     EStudentType _targetStateType;
@@ -27,6 +29,8 @@ public class StudentManager : MonoBehaviour
     {
         _idleStudent.Init(this);
         _stopStudent.Init(this);
+        _nanigaSukiEvent.init(this);
+        _wafalseEvent.init(this);
     }
 
     void CheckTime()
@@ -42,7 +46,6 @@ public class StudentManager : MonoBehaviour
 
     public void AddStudent(Student student)
     {
-
         _students.Add(student);
     }
 
@@ -79,8 +82,6 @@ public class StudentManager : MonoBehaviour
 
     public void StopEvent()
     {
-        // BGM 정지, 볼륨 조절은 RyoikiTenkaiEvent에서 처리
-        Debug.Log(2);
         _targetStateType = EStudentType.Stop;
         _stopStudent.OnStop();
         int random = Random.Range(1, 5);
@@ -88,9 +89,9 @@ public class StudentManager : MonoBehaviour
         int count = _students.Count - random;
         for (int i = 0; i < count; i++)
         {
-            int index = Random.Range(0, _students.Count);
+            int index = Random.Range(1, _students.Count);
             while (_students[index].CurrentType == EStudentType.Stop)
-                index = Random.Range(0, _students.Count);
+                index = Random.Range(1, _students.Count);
             _students[index].ChangeState(EStudentType.Stop);
         }
         _students[0].ChangeState(EStudentType.Stop);
@@ -108,8 +109,37 @@ public class StudentManager : MonoBehaviour
         {
             if (_students[i].CurrentType == EStudentType.Gymnastics)
                 _students[i].ReturnToGymnastics(_animationHash, _animationTime);
-            else if (_students[i].CurrentType == EStudentType.Idle)
+            else if (_students[i].CurrentType != EStudentType.Gymnastics)
                 _students[i].ChangeState(EStudentType.Gymnastics);
+        }
+    }
+
+    public void NanigaSukiEvent()
+    {
+        int random = Random.Range(1, 4);
+
+        int count = _students.Count - random;
+        for (int i = 0; i < count; i++)
+        {
+            int index = Random.Range(1, _students.Count);
+            while (_students[index].CurrentType == EStudentType.NanigaSuki)
+                index = Random.Range(1, _students.Count);
+            _students[index].ChangeState(EStudentType.NanigaSuki);
+        }
+        Invoke("EnndStopEvent", 3f);
+    }
+
+    public void WaflashEvent()
+    {
+        int random = Random.Range(1, 4);
+
+        int count = _students.Count - random;
+        for (int i = 0; i < count; i++)
+        {
+            int index = Random.Range(1, _students.Count);
+            while (_students[index].CurrentType == EStudentType.Waflash)
+                index = Random.Range(1, _students.Count);
+            _students[index].ChangeState(EStudentType.Waflash);
         }
     }
 }

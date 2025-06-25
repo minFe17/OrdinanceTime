@@ -6,10 +6,17 @@ public class SoundController : MonoBehaviour
     [SerializeField] protected AudioSource _bgm;
     [SerializeField] protected List<AudioSource> _sfxAudio;
 
+    GameOverSound _gameOverSound = new GameOverSound();
+
     int _index;
 
     public AudioSource BGM { get { return _bgm; } }
     public List<AudioSource> SFXAudio { get { return _sfxAudio; } }
+
+    private void Start()
+    {
+        _gameOverSound.Init(this);
+    }
 
     public void PlaySFXAudio(AudioClip audio)
     {
@@ -22,7 +29,7 @@ public class SoundController : MonoBehaviour
 
     public void StopSFXAudio()
     {
-        _sfxAudio[_index-1].Stop();
+        _sfxAudio[_index - 1].Stop();
     }
 
     public void StartBGM(AudioClip audio)
@@ -34,5 +41,10 @@ public class SoundController : MonoBehaviour
     public void StopBGM()
     {
         _bgm.Stop();
+    }
+
+    public void GameOverSound()
+    {
+        StopBGM();
     }
 }

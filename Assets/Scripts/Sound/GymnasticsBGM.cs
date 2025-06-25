@@ -7,18 +7,22 @@ public class GymnasticsBGM : MonoBehaviour
     [SerializeField] List<float> _timeList = new List<float>();
     [SerializeField] string _animationName = "Gymnastics";
 
-    PigeonSFXEvent _pigeonSFXEvent = new PigeonSFXEvent(); 
+    PigeonSFXEvent _pigeonSFXEvent = new PigeonSFXEvent();
     StopSFXEvent _stopSFXEvent = new StopSFXEvent();
 
     int _targetIndex;
     float _time;
     float _maxTime = 120f;
-    float _pigeonTime = 40f;
-    float _ryoikiTenkaiTime = 80f;
+    float _pigeonTime = 35f; 
+    float _ryoikiTenkaiTime = 50f;
+    float _nanigaSukiTime = 80f;
+    float _waflashTime = 100f;
 
     bool _isGymnasticsEnd;
     bool _isPigeonEventCalled;
     bool _isRyoikiTenkaiEventCalled;
+    bool _isNanigaSukiEventCalled;
+    bool _isWaflashEventCalled;
 
     private void Start()
     {
@@ -40,10 +44,13 @@ public class GymnasticsBGM : MonoBehaviour
         }
         PigeonEvent();
         RyoikiTenkaiEvent();
+        NanigaSukiTime();
+        WaflashTime();
 
         if (_maxTime <= _time)
         {
             _isGymnasticsEnd = true;
+            Invoke("Clear", 3f);
             GenericSingleton<StudentManager>.Instance.ChangeAnimation(_animationName, 0);
         }
     }
@@ -56,7 +63,6 @@ public class GymnasticsBGM : MonoBehaviour
                 return;
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.PigeonEvent);
             _isPigeonEventCalled = true;
-
         }
     }
 
@@ -64,11 +70,37 @@ public class GymnasticsBGM : MonoBehaviour
     {
         if (_ryoikiTenkaiTime <= _time)
         {
-            Debug.Log("Ryoiki Tenkai Event Called");
             if (_isRyoikiTenkaiEventCalled)
                 return;
-            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.RyoikiTenkaiEvent);
             _isRyoikiTenkaiEventCalled = true;
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.RyoikiTenkaiEvent);
         }
+    }
+
+    void NanigaSukiTime()
+    {
+        if (_nanigaSukiTime <= _time)
+        {
+            if (_isNanigaSukiEventCalled)
+                return;
+            _isNanigaSukiEventCalled = true;
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.NanigaSukiEvent);
+        }
+    }
+
+    void WaflashTime()
+    {
+        if (_waflashTime <= _time)
+        {
+            if (_isWaflashEventCalled)
+                return;
+            _isWaflashEventCalled = true;
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.WaflashEvent);
+        }
+    }
+
+    void Clear()
+    {
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.GameClear);
     }
 }

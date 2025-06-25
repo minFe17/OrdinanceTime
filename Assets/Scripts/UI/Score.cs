@@ -26,5 +26,6 @@ public class Score : MonoBehaviour, IMediatorEvent
     {
         _score += (int)data;
         ShowScore();
+        GenericSingleton<AudioClipManager>.Instance.PlaySFX(ESFXType.Score);
     }
 }

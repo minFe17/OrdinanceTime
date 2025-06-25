@@ -9,5 +9,9 @@ public enum EMediatorEventType
     PlayAudio,
     StopSFX,
     GameOver,
+    GameClear,
+    NextStage,
+    NanigaSukiEvent,
+    WaflashEvent,
     Max,
 }
