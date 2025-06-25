@@ -13,6 +13,8 @@ public class PrefabManager : MonoBehaviour
 
     public async Task LoadPrefab()
     {
+        if (_soundPrefabLoad.SoundPrefab != null)
+            return;
         await _soundPrefabLoad.LoadPrefab();
         await _uiPrefabLoad.LoadPrefab();
         await _ninjaPrefabLoad.LoadPrefab();

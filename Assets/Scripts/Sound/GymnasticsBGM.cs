@@ -13,8 +13,8 @@ public class GymnasticsBGM : MonoBehaviour
     int _targetIndex;
     float _time;
     float _maxTime = 120f;
-    float _pigeonTime = 45f;
-    float _ryoikiTenkaiTime = 10f;
+    float _pigeonTime = 40f;
+    float _ryoikiTenkaiTime = 80f;
 
     bool _isGymnasticsEnd;
     bool _isPigeonEventCalled;
