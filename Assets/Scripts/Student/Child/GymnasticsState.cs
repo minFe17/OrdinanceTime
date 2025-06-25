@@ -19,7 +19,6 @@ public class GymnasticsState : IStudentState
 
     void IStudentState.Exit()
     {
-        throw new System.NotImplementedException();
         // 애니메이션 변경
     }
 }

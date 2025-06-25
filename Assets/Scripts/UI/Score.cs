@@ -25,8 +25,10 @@ public class Score : MonoBehaviour, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        _score += (int)(object)data;
-        if (_score <= _ryoikiTenkaiScore)
+        Debug.Log($"HandleEvent : {data}");
+        _score += (int)data;
+        ShowScore();
+        if (_ryoikiTenkaiScore <= _score)
             _mediatorManager.Notify(EMediatorEventType.RyoikiTenkaiEvent);
     }
 }

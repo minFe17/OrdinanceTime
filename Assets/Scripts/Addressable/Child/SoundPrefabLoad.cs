@@ -20,9 +20,6 @@ public class SoundPrefabLoad : PrefabLoadBase
         //    _bgmPrefab.Add(await _addressableManager.GetAddressableAsset<AudioClip>($"{(EBGMType)i}"));
 
         for (int i = 0; i < (int)ESFXType.Max; i++)
-        {
             _sfxPrefab.Add(await _addressableManager.GetAddressableAsset<AudioClip>($"{(ESFXType)i}"));
-            Debug.Log($"SFX Prefab Loaded: {(ESFXType)i}");
-        }
     }
 }

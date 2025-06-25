@@ -10,21 +10,48 @@ public class StudentManager : MonoBehaviour
     // 스테이지 바뀔때마다 변경?
     EStudentType _targetStateType;
 
+    int _animationHash;
+    float _animationTime;
+    float _time;
+    float _botherTime = 5f;
+
     public EStudentType TargetStateType { get => _targetStateType; }
+
+    private void Update()
+    {
+        CheckTime();
+    }
 
     public void Init()
     {
         _idleStudent.Init(this);
     }
 
+    void CheckTime()
+    {
+        _time += Time.deltaTime;
+        if (_botherTime <= _time)
+        {
+            int index = Random.Range(1, _students.Count);
+            _students[index].ChangeState(EStudentType.Idle);
+            _time = 0f;
+        }
+    }
+
+    public void AddStudent(Student student)
+    {
+        _students.Add(student);
+    }
+
     public float GetCurrentAnimationTime()
     {
-        for(int i=0; i< _students.Count; i++)
-        {
-            if(_students[i].CurrentType == _targetStateType)
-                return _students[i].GetAnimationTime();
-        }
-        return 0f; 
+        return _students[0].GetAnimationTime();
+    }
+
+    public int GetCurrentAnimationHash()
+    {
+        return _students[0].GetAnimationHash();
+
     }
 
     public void SetTargetStateType(EStudentType targetStateType)
@@ -34,11 +61,33 @@ public class StudentManager : MonoBehaviour
 
     public void StopEvent()
     {
-        // 체조 정지
-        // BGM 정지
-        // 볼륨은 RyoikiTenkaiEvent이벤트에서 조절
-        // 학생들 정지(몇명만 움직임) -> 움직인 학생들 클릭하면 점수 획득
+        // BGM 정지, 볼륨 조절은 RyoikiTenkaiEvent에서 처리
+        int random = Random.Range(1, 5);
+
+        for (int i = 0; i < random; i++)
+        {
+            int index = Random.Range(1, _students.Count);
+            while (_students[index].CurrentType == EStudentType.Stop)
+                index = Random.Range(1, _students.Count);
+            _students[index].ChangeState(EStudentType.Stop);
+        }
+
         _targetStateType = EStudentType.Idle;
-        // 몇초뒤에 다시 체조로
+        _animationHash = GetCurrentAnimationHash();
+        _animationTime = GetCurrentAnimationTime();
+
+        Invoke("EnndStopEvent", 3f);
+    }
+
+    public void EndStopEvent()
+    {
+        _targetStateType = EStudentType.Gymnastics;
+        for (int i = 0; i < _students.Count; i++)
+        {
+            if (_students[i].CurrentType == EStudentType.Gymnastics)
+                _students[i].ReturnToGymnastics(_animationHash, _animationTime);
+            else if (_students[i].CurrentType == EStudentType.Idle)
+                _students[i].ChangeState(EStudentType.Gymnastics);
+        }
     }
 }

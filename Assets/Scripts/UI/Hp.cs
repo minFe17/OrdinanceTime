@@ -28,6 +28,7 @@ public class Hp : MonoBehaviour, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
+        Debug.Log($"HandleEvent : {data}");
         int value = (int)data;
         _hp += value;
         ShowHp(value);

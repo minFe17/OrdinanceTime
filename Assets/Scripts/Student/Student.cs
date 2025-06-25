@@ -18,8 +18,10 @@ public class Student : MonoBehaviour
     #region Unity Lifecycle
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _studentManager = GenericSingleton<StudentManager>.Instance;
         SetState();
+        Init();
     }
 
     void Update()
@@ -28,6 +30,11 @@ public class Student : MonoBehaviour
     }
     #endregion
 
+    void Init()
+    {
+        GenericSingleton<StudentManager>.Instance.AddStudent(this);
+    }
+
     #region FSM
     void SetState()
     {
@@ -35,6 +42,7 @@ public class Student : MonoBehaviour
         {
             { EStudentType.Gymnastics, new GymnasticsState(this) },
             { EStudentType.Idle, new IdleState(this) },
+            {EStudentType.Stop, new StopState(this) }
         };
         ChangeState(EStudentType.Gymnastics);
     }
@@ -75,11 +83,22 @@ public class Student : MonoBehaviour
         return state.normalizedTime % 1f;
     }
 
-    public void ReturnToGymnastics()
+    public int GetAnimationHash()
     {
-        float time = _studentManager.GetCurrentAnimationTime();
-        //_animator.CrossFade("", 0.2f, 0, time);
-        ChangeState(EStudentType.Gymnastics);   
+        AnimatorStateInfo state = _animator.GetCurrentAnimatorStateInfo(0);
+        return state.fullPathHash;
+    }
+
+    public void ReturnToGymnastics(int hash, float time)
+    {
+        _animator.CrossFade(hash, 0, 0, time);
+        _currentType = EStudentType.Gymnastics;
+        _currentState = _studentStateDict[_currentType];
+    }
+
+    public void ChangeAnimationSpeed(float speed)
+    {
+        _animator.speed = speed;
     }
     #endregion
 
@@ -88,11 +107,15 @@ public class Student : MonoBehaviour
     {
         if (_currentType == _studentManager.TargetStateType)
         {
+            Debug.Log("Already in target state.");
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.ChangeHP, -1);
         }
         else
         {
+            Debug.Log($"ChangeState : {_studentManager.TargetStateType}");
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddScore, 50);
+            ChangeState(_studentManager.TargetStateType);
+            ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
         }
     }
     #endregion

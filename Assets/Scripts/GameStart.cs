@@ -3,9 +3,8 @@ using Utils;
 
 public class GameStart : MonoBehaviour
 {
-    private async void Start()
+    private void Start()
     {
-        await GenericSingleton<PrefabManager>.Instance.LoadPrefab();
         SetManager();
     }
 
