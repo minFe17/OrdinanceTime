@@ -89,8 +89,8 @@ public class StudentManager : MonoBehaviour
     {
         for (int i = 0; i < _students.Count; i++)
         {
-            if (_students[i].GetAnimationSpeed() == 0)
-                _students[i].ChangeAnimationSpeed(1);
+            if (_students[i].GetAnimationSpeed() != 1f)
+                _students[i].ChangeAnimationSpeed(1f);
             _students[i].ChangeAnimation(name, value);
         }
     }
