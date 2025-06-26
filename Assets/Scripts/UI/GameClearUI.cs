@@ -6,12 +6,15 @@ public class GameClearUI : MonoBehaviour, IMediatorEvent
 {
     [SerializeField] GameObject _panel;
 
+    Animator _animator;
+
     void Start()
     {
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.GameClear, this);
+        _animator = GetComponent<Animator>();
     }
 
-    public void OnClickScreent()
+    public void LoadScene()
     {
         SceneManager.LoadScene("LobbyScene");
     }
@@ -20,6 +23,8 @@ public class GameClearUI : MonoBehaviour, IMediatorEvent
     {
         _panel.SetActive(true);
         GenericSingleton<AudioClipManager>.Instance.PlaySFX(ESFXType.GameClear);
-        Invoke("OnClickScreent", 2f);
+        GenericSingleton<MediatorManager>.Instance.UnregisterAllEvent();
+        _animator.SetBool("isShowText", true);
+        Invoke("LoadScene", 2f);
     }
 }

@@ -1,16 +1,33 @@
 using UnityEngine;
-using UnityEngine.U2D;
 using Utils;
 
 public class Lobby : MonoBehaviour
 {
+    [SerializeField] GameObject _prologObject;
     Animator _animator;
-    [SerializeField] SpriteAtlas _spriteAtlas;
 
     async void Start()
     {
-        await GenericSingleton<PrefabManager>.Instance.LoadPrefab();
         _animator = GetComponent<Animator>();
-        _animator.SetTrigger("doShowUI");
+        if (!GenericSingleton<PrefabManager>.Instance.LoadPrefabDone())
+        {
+            _prologObject.SetActive(true);
+            _animator.SetBool("isProlog", true);
+            await GenericSingleton<PrefabManager>.Instance.LoadPrefab();
+            Invoke("ShowUI", 5f);
+        }
+        else
+        {
+            ShowUI();
+        }
+    }
+
+    void ShowUI()
+    {
+        if(_prologObject.activeSelf)
+        {
+            _prologObject.SetActive(false);
+        }
+        _animator.SetBool("isShowUI", true);
     }
 }

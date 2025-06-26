@@ -281,7 +281,6 @@ MonoBehaviour:
   - 108
   - 121
   _animationName: Gymnastics
-  _admonitionBGM: {fileID: 0}
 --- !u!1 &4738949016091559687
 GameObject:
   m_ObjectHideFlags: 0

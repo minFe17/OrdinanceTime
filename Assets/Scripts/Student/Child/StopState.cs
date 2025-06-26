@@ -10,9 +10,12 @@ public class StopState : MonoBehaviour, IStudentState
         _student = student;
     }
 
+    void CheckTime()
+    {
+
+    }
     void IStudentState.Enter()
     {
-        Debug.Log("StopState Entered");
         _student.ChangeAnimationSpeed(0f);
     }
 

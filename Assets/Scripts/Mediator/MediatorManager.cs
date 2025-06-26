@@ -27,4 +27,9 @@ public class MediatorManager : MonoBehaviour
                 list[i].HandleEvent(data);
         }
     }
+
+    public void UnregisterAllEvent()
+    {
+        _mediatorEvents.Clear();
+    }
 }

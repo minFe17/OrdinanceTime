@@ -14,7 +14,6 @@ public class Student : MonoBehaviour
 
     public EStudentType CurrentType { get => _currentType; }
 
-
     #region Unity Lifecycle
     void Start()
     {
@@ -76,6 +75,7 @@ public class Student : MonoBehaviour
 
     public void ChangeAnimation(string name, int value)
     {
+        Debug.Log($"{ gameObject.name }, {name}, {value}");
         _animator.SetInteger(name, value);
     }
 
@@ -96,9 +96,21 @@ public class Student : MonoBehaviour
         return state.fullPathHash;
     }
 
+    // 애니메이션에서 호출
+    public void Returntogymnastic()
+    {
+        //_animator.CrossFade(_studentManager.GetCurrentAnimationHash(), 0.0001f, 0, _studentManager.GetCurrentAnimationTime() + 0.1f);
+        _animator.Play(_studentManager.GetCurrentAnimationHash(), 0, _studentManager.GetCurrentAnimationTime());
+        //changestate(estudenttype.gymnastics);
+        _currentType = EStudentType.Gymnastics;
+        _currentState = _studentStateDict[_currentType];
+    }
+
     public void ReturnToGymnastics(int hash, float time)
     {
-        _animator.CrossFade(hash, 0.2f, 0, time);
+        //_animator.CrossFade(hash, 0.0001f, 0, time);
+        _animator.Play(hash, 0, time);
+
         _currentType = EStudentType.Gymnastics;
         _currentState = _studentStateDict[_currentType];
     }
@@ -106,6 +118,11 @@ public class Student : MonoBehaviour
     public void ChangeAnimationSpeed(float speed)
     {
         _animator.speed = speed;
+    }
+
+    public float GetAnimationSpeed()
+    {
+        return _animator.speed;
     }
     #endregion
 

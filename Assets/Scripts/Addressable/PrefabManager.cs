@@ -22,4 +22,11 @@ public class PrefabManager : MonoBehaviour
         await _ninjaPrefabLoad.LoadPrefab();
         await _effectPrefabLoad.LoadPrefab();
     }
+
+    public bool LoadPrefabDone()
+    {
+        if(_soundPrefabLoad.SoundPrefab == null)
+            return false;
+        return true;
+    }
 }

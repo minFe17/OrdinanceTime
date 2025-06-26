@@ -9,6 +9,8 @@ public class StudentManager : MonoBehaviour
     StopStudent _stopStudent = new StopStudent();
     NanigaSukiEvent _nanigaSukiEvent = new NanigaSukiEvent();
     WafalseEvent _wafalseEvent = new WafalseEvent();
+    GameOverStudent _gameOverStudent = new GameOverStudent();
+    GameClearStudent _gameClearStudent = new GameClearStudent();
 
     // 스테이지 바뀔때마다 변경?
     EStudentType _targetStateType;
@@ -17,6 +19,7 @@ public class StudentManager : MonoBehaviour
     float _animationTime;
     float _time;
     float _botherTime = 5f;
+    bool _isGameEnd = false;    
 
     public EStudentType TargetStateType { get => _targetStateType; }
 
@@ -31,10 +34,15 @@ public class StudentManager : MonoBehaviour
         _stopStudent.Init(this);
         _nanigaSukiEvent.init(this);
         _wafalseEvent.init(this);
+        _gameOverStudent.Init(this);
+        _gameClearStudent.Init(this);
+        _isGameEnd= false;
     }
 
     void CheckTime()
     {
+        if (_isGameEnd)
+            return;
         _time += Time.deltaTime;
         if (_botherTime <= _time)
         {
@@ -51,13 +59,16 @@ public class StudentManager : MonoBehaviour
 
     public float GetCurrentAnimationTime()
     {
+        if (_students.Count == 0)
+            return 0;
         return _students[0].GetAnimationTime();
     }
 
     public int GetCurrentAnimationHash()
     {
+        if (_students.Count == 0)
+            return 0;
         return _students[0].GetAnimationHash();
-
     }
 
     public void SetTargetStateType(EStudentType targetStateType)
@@ -77,7 +88,11 @@ public class StudentManager : MonoBehaviour
     public void ChangeAnimation(string name, int value)
     {
         for (int i = 0; i < _students.Count; i++)
+        {
+            if (_students[i].GetAnimationSpeed() == 0)
+                _students[i].ChangeAnimationSpeed(1);
             _students[i].ChangeAnimation(name, value);
+        }
     }
 
     public void StopEvent()
@@ -141,5 +156,11 @@ public class StudentManager : MonoBehaviour
                 index = Random.Range(1, _students.Count);
             _students[index].ChangeState(EStudentType.Waflash);
         }
+    }
+
+    public void Clear()
+    {
+        _isGameEnd = true;
+        _students.Clear();
     }
 }
