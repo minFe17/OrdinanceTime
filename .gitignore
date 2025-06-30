@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/unity,visualstudio
-# Edit at https://www.toptal.com/developers/gitignore?templates=unity,visualstudio
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudio,unity
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,unity
 
 ### Unity ###
 # This .gitignore file should be placed at the root of your Unity project directory
@@ -259,12 +259,11 @@ publish/
 # in these scripts will be unencrypted
 PublishScripts/
 
-# NuGet 
+# NuGet Packages
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
 # The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
@@ -465,4 +464,4 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/unity,visualstudio
+# End of https://www.toptal.com/developers/gitignore/api/visualstudio,unity
