@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-public class IdleState : MonoBehaviour, IStudentState
+public class IdleState : IStudentState
 {
     Student _student;
     StudentManager _studentManager;
@@ -38,6 +38,7 @@ public class IdleState : MonoBehaviour, IStudentState
 
     void IStudentState.Exit()
     {
-        _student.ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
+        // Ã¼Á¶·Î º¹±Í
+        _student.ReturnToGymnastics();
     }
 }

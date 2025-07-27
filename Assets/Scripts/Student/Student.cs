@@ -75,7 +75,6 @@ public class Student : MonoBehaviour
 
     public void ChangeAnimation(string name, int value)
     {
-        Debug.Log($"{ gameObject.name }, {name}, {value}");
         _animator.SetInteger(name, value);
     }
 
@@ -86,31 +85,36 @@ public class Student : MonoBehaviour
 
     public float GetAnimationTime()
     {
+        // 현재 재생 중인 애니메이션의 normalizedTime을 반환 (0 ~ 1)
         AnimatorStateInfo state = _animator.GetCurrentAnimatorStateInfo(0);
         return state.normalizedTime % 1f;
     }
 
     public int GetAnimationHash()
     {
+        // 현재 재생 중인 애니메이션의 fullPathHash 값을 반환
         AnimatorStateInfo state = _animator.GetCurrentAnimatorStateInfo(0);
         return state.fullPathHash;
     }
 
-    // 애니메이션에서 호출
-    public void Returntogymnastic()
+    // 체조로 복귀
+    public void ReturnToGymnastics()
     {
-        //_animator.CrossFade(_studentManager.GetCurrentAnimationHash(), 0.0001f, 0, _studentManager.GetCurrentAnimationTime() + 0.1f);
-        _animator.Play(_studentManager.GetCurrentAnimationHash(), 0, _studentManager.GetCurrentAnimationTime());
-        //changestate(estudenttype.gymnastics);
+        // 현재 애니메이션 정보 가져오기
+        int currentHash = _studentManager.GetCurrentAnimationHash();
+        float currentTime = _studentManager.GetCurrentAnimationTime();
+
+        // 동일한 애니메이션을 같은 타이밍에서 재생
+        _animator.Play(currentHash, 0, currentTime);
+
+        // 상태 전환
         _currentType = EStudentType.Gymnastics;
         _currentState = _studentStateDict[_currentType];
     }
 
     public void ReturnToGymnastics(int hash, float time)
     {
-        //_animator.CrossFade(hash, 0.0001f, 0, time);
         _animator.Play(hash, 0, time);
-
         _currentType = EStudentType.Gymnastics;
         _currentState = _studentStateDict[_currentType];
     }
@@ -141,7 +145,7 @@ public class Student : MonoBehaviour
             GameObject temp = Instantiate(GenericSingleton<PrefabManager>.Instance.EffectPrefabLoad.EffectPrefab);
             temp.transform.position += transform.position;
             ChangeState(_studentManager.TargetStateType);
-            ReturnToGymnastics(_studentManager.GetCurrentAnimationHash(), _studentManager.GetCurrentAnimationTime());
+            ReturnToGymnastics();
         }
     }
     #endregion
