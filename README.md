@@ -6,7 +6,8 @@
 
 - **플랫폼** : PC (Windows)
 - **Unity 버전** : 2021.3.27f1
-- **📄 노션 링크** : [Notion 링크](https://mincheolstudy.notion.site/221d4b6c965c805faacfc4c018892dd4)
+- **📄 기술문서 링크** : [기술문서 링크](https://drive.google.com/drive/folders/1gcQ5xP3MlVEgDHBIyB4wQR_PSS4JhcN1?hl=ko)
+- **🎬 영상 링크** : [영상 링크](https://www.youtube.com/watch?v=CitMIa1tYvQ)
 ---
 
 ## 🎯 기술 목표
